@@ -1,0 +1,11 @@
+<div class="text-center">
+  <h1>Editar Empleado</h1>
+
+  <div *ngIf="showForm">
+    <app-form-create-edition
+      [formEmployee]="formEmployee"
+      [employee]="employee"
+      (sendEmployee)="editEmployee($event)"
+    ></app-form-create-edition>
+  </div>
+</div>

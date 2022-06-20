@@ -1,0 +1,11 @@
+<div class="text-center">
+  <h1>Editar Tarea</h1>
+
+  <div *ngIf="showForm">
+    <app-form-create-edition
+      [formTask]="formTask"
+      [task]="task"
+      (sendTask)="editTask($event)"
+    ></app-form-create-edition>
+  </div>
+</div>
