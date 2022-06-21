@@ -28,9 +28,7 @@ export class EditComponent implements OnInit {
 
     this.initForm();
 
-    const id =
-      this.activatedRoute.snapshot.paramMap.get('id') ||
-      localStorage.getItem('ID_TASK');
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.getTaskById(Number(id));
   }
@@ -39,7 +37,7 @@ export class EditComponent implements OnInit {
     this.formTask = this.fb.group({
       description: ['', Validators.required],
       status: ['', Validators.required],
-      executionDate: ['', Validators.required],
+      executionDate: [''],
       employee: ['', Validators.required]
     });
   }
@@ -55,7 +53,9 @@ export class EditComponent implements OnInit {
   }
 
   private setFormTask(task: Task): void {
-    const executionDate = moment(task.executionDate).format('yyyy-MM-DD');
+    const executionDate = task.executionDate
+      ? moment(task.executionDate).format('yyyy-MM-DD')
+      : null;
     this.formTask.get('description')?.setValue(task.description);
     this.formTask.get('status')?.setValue(task.status);
     this.formTask.get('executionDate')?.setValue(executionDate);

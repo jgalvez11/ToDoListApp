@@ -31,6 +31,12 @@ export class TaskService {
     );
   }
 
+  getTasksByEmployeeId(id: number): Observable<Task[]> {
+    return this.http.get<Task[]>(
+      `${environment.services.taskController.getTasksByEmployeeId}/${id}`
+    );
+  }
+
   saveTask(task: Task): Observable<Task> {
     return this.http.post<Task>(environment.services.taskController.save, task);
   }

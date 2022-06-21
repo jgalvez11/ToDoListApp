@@ -26,7 +26,7 @@ export class CreateComponent implements OnInit {
     this.formTask = this.fb.group({
       description: ['', Validators.required],
       status: ['', Validators.required],
-      executionDate: ['', Validators.required],
+      executionDate: [''],
       employee: ['', Validators.required]
     });
   }

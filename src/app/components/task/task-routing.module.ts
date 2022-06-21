@@ -10,6 +10,10 @@ const routes: Routes = [
     component: TaskComponent
   },
   {
+    path: ':id',
+    component: TaskComponent
+  },
+  {
     path: 'create',
     component: CreateComponent
   },

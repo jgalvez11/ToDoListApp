@@ -26,9 +26,7 @@ export class EditComponent implements OnInit {
 
     this.initForm();
 
-    const id =
-      this.activatedRoute.snapshot.paramMap.get('id') ||
-      localStorage.getItem('ID_EMPLOYEE');
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.getEmployeeById(Number(id));
   }

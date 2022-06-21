@@ -9,6 +9,7 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 
 import Swal from 'sweetalert2';
+import { ErrorResponse } from '../models/error-response';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -27,7 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   handleError(error: HttpErrorResponse): void {
-    let errorMsg = {
+    let errorMsg: ErrorResponse = {
       type: '',
       message: ''
     };
@@ -36,7 +37,11 @@ export class ErrorInterceptor implements HttpInterceptor {
       errorMsg.message = `Error: ${error.error.message}`;
     } else {
       errorMsg.type = 'Error de lado del SERVIDOR.';
-      errorMsg.message = `Error Code: ${error.status},  Message: ${error.message}`;
+      errorMsg.message = `Error Code: ${error.status},  Message: ${error.error.message}`;
+      errorMsg.message = this.validateMessageError(
+        error.error.message,
+        error.url as string
+      );
     }
 
     Swal.fire({
@@ -45,5 +50,13 @@ export class ErrorInterceptor implements HttpInterceptor {
       icon: 'error',
       confirmButtonText: 'Aceptar'
     });
+  }
+
+  validateMessageError(message: string, path: string): string {
+    if (message.includes('constraint') && path.includes('employee')) {
+      message = 'Existen tareas asociadas a este empleado';
+    }
+
+    return message;
   }
 }

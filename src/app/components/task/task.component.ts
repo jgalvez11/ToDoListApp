@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/models/task';
 import { TaskService } from 'src/app/services/task.service';
 import { UtilService } from 'src/app/utils/util.service';
@@ -16,11 +16,18 @@ export class TaskComponent implements OnInit {
   constructor(
     private router: Router,
     private utilService: UtilService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.getAllTasks();
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.getAllTasksByEmployeeId(Number(id));
+    } else {
+      this.getAllTasks();
+    }
   }
 
   editTask(task: Task) {
@@ -62,6 +69,12 @@ export class TaskComponent implements OnInit {
 
   getAllTasks() {
     this.taskService.getAllTasks().subscribe((data) => {
+      this.taskList = data;
+    });
+  }
+
+  getAllTasksByEmployeeId(id: number) {
+    this.taskService.getTasksByEmployeeId(id).subscribe((data) => {
       this.taskList = data;
     });
   }

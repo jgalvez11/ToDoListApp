@@ -29,6 +29,11 @@ export class EmployeeComponent implements OnInit {
     this.router.navigate(['/employee/edit', employee.id]);
   }
 
+  showTasksEmployee(employee: Employee) {
+    localStorage.setItem('ID_EMPLOYEE', String(employee.id));
+    this.router.navigate(['/task', employee.id]);
+  }
+
   deleteEmployee(employee: Employee): void {
     this.employeeService
       .deleteEmployeeById(employee.id || 0)

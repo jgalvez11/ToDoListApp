@@ -35,7 +35,7 @@ export class FormCreateEditionComponent implements OnInit {
       description: this.formTask.get('description')?.value,
       status: this.formTask.get('status')?.value,
       executionDate: this.formTask.get('executionDate')?.value,
-      // employee
+      employee
     };
 
     this.sendTask.emit(this.task);

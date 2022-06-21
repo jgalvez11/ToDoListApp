@@ -10,7 +10,6 @@ export const environment = {
     employeeController: {
       getAll: `${HOST}/employee/getAll`,
       getById: `${HOST}/employee/getById`,
-      getTasksById: `${HOST}/employee/getTasksById`,
       save: `${HOST}/employee/save`,
       delete: `${HOST}/employee/delete`,
       update: `${HOST}/employee/update`
@@ -18,6 +17,7 @@ export const environment = {
     taskController: {
       getAll: `${HOST}/task/getAll`,
       getById: `${HOST}/task/getById`,
+      getTasksByEmployeeId: `${HOST}/task/getTasksByEmployeeId`,
       save: `${HOST}/task/save`,
       delete: `${HOST}/task/delete`,
       update: `${HOST}/task/update`

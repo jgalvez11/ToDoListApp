@@ -6,5 +6,4 @@ export interface Employee {
   lastName: string;
   email: string;
   createdAt?: string;
-  tasks?: Task[];
 }
